@@ -2,7 +2,7 @@
 
 class Passenger {
     buyTicketFrom(controller) {
-
+        controller.reserveSeat();
     }
 
     get haveTicket() {
