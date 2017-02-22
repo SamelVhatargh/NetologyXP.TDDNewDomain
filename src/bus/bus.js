@@ -1,7 +1,8 @@
 "use strict";
 
 class Bus {
-    constructor() {
+    constructor(maxSeatsCount) {
+        this._maxSeatsCount = maxSeatsCount;
         this._reservedSeatsCount = 0;
     }
     get reservedSeatsCount() {
@@ -11,7 +12,7 @@ class Bus {
         this._reservedSeatsCount = value;
     }
     checkIfReadyToGo() {
-        return false;
+        return this._reservedSeatsCount >= this._maxSeatsCount;
     }
 }
 
