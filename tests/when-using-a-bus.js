@@ -5,13 +5,14 @@ var Controller = require('../src/bus/controller');
 var Bus = require('../src/bus/bus');
 
 suite('when using a bus', function () {
-    let bus = {};
+    let halfEmptyBus = {};
     let me = {};
     let controller = {};
 
     setup(function () {
-        bus = new Bus();
-        controller = new Controller(bus);
+        halfEmptyBus = new Bus(10);
+        halfEmptyBus.reservedSeatsCount = 5;
+        controller = new Controller(halfEmptyBus);
         me = new Passenger();
     });
 
@@ -22,16 +23,16 @@ suite('when using a bus', function () {
     });
 
     test('bus seat is reserved after I get ticket', function () {
-        let previousReservedSeatsCount = bus.reservedSeatsCount;
+        let previousReservedSeatsCount = halfEmptyBus.reservedSeatsCount;
 
         me.buyTicketFrom(controller);
 
-        assert.equal(bus.reservedSeatsCount, previousReservedSeatsCount + 1);
+        assert.equal(halfEmptyBus.reservedSeatsCount, previousReservedSeatsCount + 1);
     });
 
     test('bus is not ready to go if there are empty seats left', function () {
 
-        let isReadyToGo = bus.checkIfReadyToGo();
+        let isReadyToGo = halfEmptyBus.checkIfReadyToGo();
 
         assert.equal(isReadyToGo, false);
     });
