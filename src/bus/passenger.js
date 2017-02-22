@@ -4,10 +4,17 @@ class Passenger {
     constructor(moneyCount) {
         this._moneyCount = moneyCount;
         this._haveTicket = false;
+        this._hasDisability = false;
     }
     buyTicketFrom(controller) {
         this._haveTicket = controller.reserveSeat();
-        this._moneyCount = this._moneyCount - controller.ticketPrice;
+        if (!this.hasDisability()) {
+            this._moneyCount = this._moneyCount - controller.ticketPrice;
+        }
+    }
+
+    breakLeg() {
+        this._hasDisability = true;
     }
 
     get haveTicket() {
@@ -16,6 +23,10 @@ class Passenger {
 
     get moneyCount() {
         return this._moneyCount;
+    }
+
+    hasDisability() {
+        return this._hasDisability;
     }
 }
 

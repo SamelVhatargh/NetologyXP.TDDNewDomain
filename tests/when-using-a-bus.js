@@ -65,4 +65,13 @@ suite('when using a bus', function () {
 
         assert.equal(me.moneyCount, previousMoneyCount - halfEmptyBusController.ticketPrice);
     })
+
+    test('my money is not reduced by tickets price if I have disability', function () {
+        let previousMoneyCount = me.moneyCount;
+        me.breakLeg();
+
+        me.buyTicketFrom(halfEmptyBusController);
+
+        assert.equal(me.moneyCount, previousMoneyCount);
+    })
 });
