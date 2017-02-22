@@ -12,6 +12,10 @@ class Bus {
         this._reservedSeatsCount = value;
     }
     checkIfReadyToGo() {
+        return this.isFull();
+    }
+
+    isFull() {
         return this._reservedSeatsCount >= this._maxSeatsCount;
     }
 }

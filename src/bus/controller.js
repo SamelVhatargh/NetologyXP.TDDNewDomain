@@ -6,7 +6,7 @@ class Controller {
     }
 
     reserveSeat() {
-        if (this._bus.reservedSeatsCount + 1 >= this._bus._maxSeatsCount) {
+        if (this._bus.isFull()) {
             return false;
         }
         this._bus.reservedSeatsCount++;
