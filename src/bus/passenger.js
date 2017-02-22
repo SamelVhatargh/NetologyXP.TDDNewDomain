@@ -1,12 +1,15 @@
 "use strict";
 
 class Passenger {
+    constructor() {
+        this._haveTicket = false;
+    }
     buyTicketFrom(controller) {
-        controller.reserveSeat();
+        this._haveTicket = controller.reserveSeat();
     }
 
     get haveTicket() {
-        return true;
+        return this._haveTicket;
     }
 }
 

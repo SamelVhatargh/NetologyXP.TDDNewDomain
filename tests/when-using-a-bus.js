@@ -6,26 +6,40 @@ var Bus = require('../src/bus/bus');
 
 suite('when using a bus', function () {
     let halfEmptyBus = {};
+    let fullBus = {};
     let me = {};
-    let controller = {};
+    let halfEmptyBusController = {};
+    let fullBusController = {};
 
     setup(function () {
         halfEmptyBus = new Bus(10);
         halfEmptyBus.reservedSeatsCount = 5;
-        controller = new Controller(halfEmptyBus);
+        halfEmptyBusController = new Controller(halfEmptyBus);
+
+        fullBus = new Bus(10);
+        fullBus.reservedSeatsCount = 10;
+        fullBusController = new Controller(fullBus);
+
         me = new Passenger();
     });
 
     test('controller gives me a ticket after I pay for it', function() {
-        me.buyTicketFrom(controller);
+        me.buyTicketFrom(halfEmptyBusController);
 
         assert.equal(me.haveTicket, true);
     });
 
+    test('controller cant give me a ticket if there are no seats left', function() {
+        me.buyTicketFrom(fullBusController);
+
+        assert.equal(me.haveTicket, false);
+    });
+
+
     test('bus seat is reserved after I get ticket', function () {
         let previousReservedSeatsCount = halfEmptyBus.reservedSeatsCount;
 
-        me.buyTicketFrom(controller);
+        me.buyTicketFrom(halfEmptyBusController);
 
         assert.equal(halfEmptyBus.reservedSeatsCount, previousReservedSeatsCount + 1);
     });
@@ -38,8 +52,6 @@ suite('when using a bus', function () {
     });
 
     test('bus is ready to go if there are no empty seats left', function () {
-        let fullBus = new Bus(10);
-        fullBus.reservedSeatsCount = 10;
 
         let isReadyToGo = fullBus.checkIfReadyToGo();
 
