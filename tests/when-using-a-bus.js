@@ -20,7 +20,7 @@ suite('when using a bus', function () {
         fullBus.reservedSeatsCount = 10;
         fullBusController = new Controller(fullBus);
 
-        me = new Passenger();
+        me = new Passenger(200);
     });
 
     test('controller gives me a ticket after I pay for it', function() {
@@ -57,4 +57,12 @@ suite('when using a bus', function () {
 
         assert.equal(isReadyToGo, true);
     });
+
+    test('my money is reduced by tickets price after I pay for ticket', function () {
+        let previousMoneyCount = me.moneyCount;
+
+        me.buyTicketFrom(halfEmptyBusController);
+
+        assert.equal(me.moneyCount, previousMoneyCount - halfEmptyBusController.ticketPrice);
+    })
 });

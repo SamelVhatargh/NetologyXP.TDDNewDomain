@@ -12,6 +12,10 @@ class Controller {
         this._bus.reservedSeatsCount++;
         return true;
     }
+
+    get ticketPrice() {
+        return 100;
+    }
 }
 
 module.exports = Controller;
