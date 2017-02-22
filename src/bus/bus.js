@@ -10,6 +10,9 @@ class Bus {
     set reservedSeatsCount(value) {
         this._reservedSeatsCount = value;
     }
+    checkIfReadyToGo() {
+        return false;
+    }
 }
 
 module.exports = Bus;

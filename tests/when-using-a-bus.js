@@ -28,4 +28,11 @@ suite('when using a bus', function () {
 
         assert.equal(bus.reservedSeatsCount, previousReservedSeatsCount + 1);
     });
+
+    test('bus is not ready to go if there are empty seats left', function () {
+
+        let isReadyToGo = bus.checkIfReadyToGo();
+
+        assert.equal(isReadyToGo, false);
+    });
 });
